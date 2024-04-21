@@ -12,6 +12,10 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwn
 DROP TABLE {databaseOwner}[{objectQualifier}HelloWorld_Items]
 GO
 
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}HelloWorld_Questions]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}HelloWorld_Questions]
+GO
+
 CREATE TABLE {databaseOwner}{objectQualifier}HelloWorld_Items
     (
     ItemId int NOT NULL IDENTITY (1, 1),
@@ -27,6 +31,17 @@ CREATE TABLE {databaseOwner}{objectQualifier}HelloWorld_Items
      TEXTIMAGE_ON [PRIMARY]
 GO
 
+CREATE TABLE {databaseOwner}{objectQualifier}HelloWorld_Questions
+    (
+    QuestionId int NOT NULL IDENTITY (1, 1),
+    Question nvarchar(MAX) NOT NULL,
+    AnswerA nvarchar(MAX) NOT NULL,
+    AnswerB nvarchar(MAX) NOT NULL,
+    AnswerC nvarchar(MAX) NOT NULL
+    )  ON [PRIMARY]
+     TEXTIMAGE_ON [PRIMARY]
+GO
+
 
 ALTER TABLE {databaseOwner}{objectQualifier}HelloWorld_Items ADD CONSTRAINT
     PK_{objectQualifier}HelloWorld_Items PRIMARY KEY CLUSTERED 
@@ -35,6 +50,22 @@ ALTER TABLE {databaseOwner}{objectQualifier}HelloWorld_Items ADD CONSTRAINT
     ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 
 GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}HelloWorld_Questions ADD CONSTRAINT
+    PK_{objectQualifier}HelloWorld_Questions PRIMARY KEY CLUSTERED 
+    (
+    QuestionId
+    ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+
+INSERT INTO {databaseOwner}{objectQualifier}HelloWorld_Questions
+           (Question, AnswerA, AnswerB, AnswerC)
+     VALUES
+           ('Kérdés1', 'A', 'B', 'C')
+GO
+
+
 
 
 /************************************************************/
