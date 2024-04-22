@@ -15,41 +15,29 @@ using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
 using System;
 using System.Web.Caching;
+using DotNetNuke.UI.Modules;
+using Bamm.Dnn.Dnn.Bamm.HelloWorld.Models;
+using DotNetNuke.Web.Mvc.Framework.Controllers;
 
 namespace Bamm.Dnn.Dnn.Bamm.HelloWorld.Models
 {
     [TableName("HelloWorld_Question")]
-    //setup the primary key for table
-    [PrimaryKey("Question_ID", AutoIncrement = true)]
-    //configure caching using PetaPoco
+    [PrimaryKey("QuestionId", AutoIncrement = true)]
     [Cacheable("Questions", CacheItemPriority.Default, 20)]
-    //scope the objects to the ModuleId of a module on a page (or copy of a module on a page)
     [Scope("ModuleId")]
     public class Questions
     {
-        ///<summary>
-        /// The ID of your object with the name of the ItemName
-        ///</summary>
-        public int Question_ID { get; set; } = -1;
-        ///<summary>
-        /// A string with the name of the ItemName
-        ///</summary>
+        public int QuestionId { get; set; } = -1;
+
         public string Question { get; set; }
 
-        ///<summary>
-        /// A string with the description of the object
-        ///</summary>
         public string AnswerA { get; set; }
 
-        ///<summary>
-        /// An integer with the user id of the assigned user for the object
-        ///</summary>
         public string AnswerB { get; set; }
 
-        ///<summary>
-        /// The ModuleId of where the object was created and gets displayed
-        ///</summary>
         public string AnswerC { get; set; }
+
+        public int ModuleId { get; set; } = 410;
 
     }
 }

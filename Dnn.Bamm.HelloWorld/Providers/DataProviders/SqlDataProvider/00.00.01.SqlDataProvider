@@ -37,7 +37,8 @@ CREATE TABLE {databaseOwner}{objectQualifier}HelloWorld_Questions
     Question nvarchar(MAX) NOT NULL,
     AnswerA nvarchar(MAX) NOT NULL,
     AnswerB nvarchar(MAX) NOT NULL,
-    AnswerC nvarchar(MAX) NOT NULL
+    AnswerC nvarchar(MAX) NOT NULL,
+    ModuleId int NOT NULL
     )  ON [PRIMARY]
      TEXTIMAGE_ON [PRIMARY]
 GO
@@ -60,9 +61,9 @@ ALTER TABLE {databaseOwner}{objectQualifier}HelloWorld_Questions ADD CONSTRAINT
 GO
 
 INSERT INTO {databaseOwner}{objectQualifier}HelloWorld_Questions
-           (Question, AnswerA, AnswerB, AnswerC)
+           (Question, AnswerA, AnswerB, AnswerC, ModuleId)
      VALUES
-           ('Kérdés1', 'A', 'B', 'C')
+           ('Kérdés1', 'A', 'B', 'C', 410)
 GO
 
 
