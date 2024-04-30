@@ -18,6 +18,7 @@ using System.Web.Caching;
 using DotNetNuke.UI.Modules;
 using Bamm.Dnn.Dnn.Bamm.HelloWorld.Models;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
+using System.Collections.Generic;
 
 namespace Bamm.Dnn.Dnn.Bamm.HelloWorld.Models
 {
@@ -27,17 +28,18 @@ namespace Bamm.Dnn.Dnn.Bamm.HelloWorld.Models
     [Scope("ModuleId")]
     public class Questions
     {
-        public int QuestionId { get; set; } = -1;
+        public int QuestionId { get; set; }
 
         public string Question { get; set; }
 
-        public string AnswerA { get; set; }
+        //public string AnswerA { get; set; }
 
-        public string AnswerB { get; set; }
+        //public string AnswerB { get; set; }
 
-        public string AnswerC { get; set; }
+        //public string AnswerC { get; set; }
 
-        public int ModuleId { get; set; } = 410;
+        //public int ModuleId { get; set; } = 410;
+
 
     }
 }

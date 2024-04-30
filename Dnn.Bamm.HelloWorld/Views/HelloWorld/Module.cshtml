@@ -1,16 +1,20 @@
-﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable<Bamm.Dnn.Dnn.Bamm.HelloWorld.Models.Questions>>
+﻿@*@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable<Bamm.Dnn.Dnn.Bamm.HelloWorld.Models.Questions>>
 
-<div id="Items-@Dnn.ModuleContext.ModuleId">
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers*@
+
+<div>
     @RenderBody()
     <ul class="tm_tl">
         <li class="tm_t">
-            @foreach (var q in Model)
-            {
-                <h3>@q.Question</h3>
-                <div class="tm_td">@q.AnswerA</div>
-                <div class="tm_td">@q.AnswerB</div>
-                <div class="tm_td">@q.AnswerC</div>
-            }
+            <div>aaaa</div>
+            @*@foreach (var q in Model)
+                {
+                    <h3>@q.Question</h3>
+                    <div class="tm_td">@q.AnswerA</div>
+                    <div class="tm_td">@q.AnswerB</div>
+                    <div class="tm_td">@q.AnswerC</div>
+                }*@
         </li>
     </ul>
 </div>

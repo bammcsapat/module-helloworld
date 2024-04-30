@@ -108,6 +108,7 @@
     <Compile Include="Components\QuestionManager.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Models\Answers.cs" />
     <Compile Include="Models\Questions.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Controllers\ItemController.cs" />

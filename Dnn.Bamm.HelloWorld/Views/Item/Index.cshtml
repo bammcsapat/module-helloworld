@@ -1,33 +1,47 @@
-﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable< Bamm.Dnn.Dnn.Bamm.HelloWorld.Models.Item >>
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage
 
 @using System.Text.RegularExpressions
 @using DotNetNuke.Web.Mvc.Helpers
 
+@using DotNetNuke.Data
+@using DotNetNuke.Web.Client.ClientResourceManagement;
+@using DotNetNuke.Framework.JavaScriptLibraries;
+@using Bamm.Dnn.Dnn.Bamm.HelloWorld.Components;
+@using Bamm.Dnn.Dnn.Bamm.HelloWorld.Models;
+@using Bamm.Dnn.Dnn.Bamm.HelloWorld.Controllers;
+
+@using System.Data
+
+@{ 
+    var controller = new Bamm.Dnn.Dnn.Bamm.HelloWorld.Controllers.QuestionController();
+    var firsQuestion = controller.GetQuestionById(1);
+    Answers[] firstAnswers = controller.GetAnswerByQuestion(1);
+}
+
+<script>
+    function getAnswers(id) {
+        $.ajax({
+            type: "POST",
+            url: "QuestionController/GetQuestionById",
+            data: { id: id },
+            success: function (response) {
+                var firsQuestion = response.firsQuestion;
+                var firstAnswers = response.firstAnswers;
+
+                $("#button1").text(firstAnswers[0].Answer);
+                $("#button2").text(firstAnswers[1].Answer);
+                $("#button3").text(firstAnswers[2].Answer);
+            }
+
+        })
+    }
+</script>
 
 <div>
-    @if (Model.Count() == 0)
-    {
-        <p>@Dnn.LocalizeString("NoItems")</p>
-    }
-    else
-    {
-        <ul class="tm_tl">
-            @foreach (var item in Model)
-            {
-                <li class="tm_t">
-                    <h3>@item.ItemName</h3>
-                    <div class="tm_td">@item.ItemDescription</div>
-                    @{
-                        if (Dnn.ModuleContext.IsEditable)
-                        {
-                            <div>
-                                <a href="@Url.Action("Edit", "Item", new {ctl = "Edit", itemId = item.ItemId})">@Dnn.LocalizeString("EditItem")</a>
-                                <a href="@Url.Action("Delete", "Item", new {itemId = item.ItemId})">@Dnn.LocalizeString("DeleteItem")</a>
-                            </div>
-                        }
-                    }
-                </li>
-            }
-        </ul>
-    }
+    <p>
+        @(firsQuestion.Question)
+    </p>
+    <button>@(firstAnswers[0].Answer)</button>
+    <button>@(firstAnswers[1].Answer)</button>
+    <button>@(firstAnswers[2].Answer)</button>
 </div>

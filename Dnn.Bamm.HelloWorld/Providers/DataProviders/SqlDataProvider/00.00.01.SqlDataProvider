@@ -31,25 +31,21 @@ CREATE TABLE {databaseOwner}{objectQualifier}HelloWorld_Items
      TEXTIMAGE_ON [PRIMARY]
 GO
 
-CREATE TABLE {databaseOwner}{objectQualifier}HelloWorld_Questions
-    (
-    QuestionId int NOT NULL IDENTITY (1, 1),
-    Question nvarchar(MAX) NOT NULL,
-    AnswerA nvarchar(MAX) NOT NULL,
-    AnswerB nvarchar(MAX) NOT NULL,
-    AnswerC nvarchar(MAX) NOT NULL,
-    ModuleId int NOT NULL
-    )  ON [PRIMARY]
-     TEXTIMAGE_ON [PRIMARY]
-GO
-
-
 ALTER TABLE {databaseOwner}{objectQualifier}HelloWorld_Items ADD CONSTRAINT
     PK_{objectQualifier}HelloWorld_Items PRIMARY KEY CLUSTERED 
     (
     ItemId
     ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 
+GO
+
+
+CREATE TABLE {databaseOwner}{objectQualifier}HelloWorld_Questions
+    (
+    QuestionId int NOT NULL IDENTITY (1, 1),
+    Question nvarchar(MAX) NOT NULL,
+    )  ON [PRIMARY]
+     TEXTIMAGE_ON [PRIMARY]
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}HelloWorld_Questions ADD CONSTRAINT
@@ -60,10 +56,46 @@ ALTER TABLE {databaseOwner}{objectQualifier}HelloWorld_Questions ADD CONSTRAINT
 
 GO
 
+CREATE TABLE {databaseOwner}{objectQualifier}HelloWorld_Answers
+    (
+    AnswerId int NOT NULL IDENTITY (1, 1),
+    QuestionId INT,
+    Answer nvarchar(MAX) NOT NULL,
+    NextQuestionId nvarchar(MAX),
+    FOREIGN KEY (QuestionId) REFERENCES HelloWorld_Questions(QuestionId) ON DELETE CASCADE
+    );
+GO
+
+
+ALTER TABLE {databaseOwner}{objectQualifier}HelloWorld_Answers ADD CONSTRAINT
+    PK_{objectQualifier}HelloWorld_Answers PRIMARY KEY CLUSTERED 
+    (
+    AnswerId
+    ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+
 INSERT INTO {databaseOwner}{objectQualifier}HelloWorld_Questions
-           (Question, AnswerA, AnswerB, AnswerC, ModuleId)
+           (Question)
      VALUES
-           ('Kérdés1', 'A', 'B', 'C', 410)
+           ('Kérdés1', 'Kérdés2', 'Kérdés3', 'Kérdés4')
+GO
+
+INSERT INTO {databaseOwner}{objectQualifier}HelloWorld_Answers
+           (QuestionId, Answer, NextQuestionId)
+     VALUES
+           (1,'A',1)
+           (1,'B',1)
+           (1,'C',1)
+           (2,'A',1)
+           (2,'B',1)
+           (2,'C',1)
+           (3,'A',1)
+           (3,'B',1)
+           (3,'C',1)
+           (4,'A',1)
+           (4,'B',1)
+           (4,'C',1)
 GO
 
 
