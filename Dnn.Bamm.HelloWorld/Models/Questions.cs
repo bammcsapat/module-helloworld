@@ -22,7 +22,7 @@ using System.Collections.Generic;
 
 namespace Bamm.Dnn.Dnn.Bamm.HelloWorld.Models
 {
-    [TableName("HelloWorld_Question")]
+    [TableName("HelloWorld_Questions")]
     [PrimaryKey("QuestionId", AutoIncrement = true)]
     [Cacheable("Questions", CacheItemPriority.Default, 20)]
     [Scope("ModuleId")]

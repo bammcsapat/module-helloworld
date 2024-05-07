@@ -1,4 +1,5 @@
 ﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage
+@*<IEnumerable<Bamm.Dnn.Dnn.Bamm.HelloWorld.Models.Questions>>*@
 
 @using System.Text.RegularExpressions
 @using DotNetNuke.Web.Mvc.Helpers
@@ -13,35 +14,58 @@
 @using System.Data
 
 @{ 
+    var id = 1;
     var controller = new Bamm.Dnn.Dnn.Bamm.HelloWorld.Controllers.QuestionController();
-    var firsQuestion = controller.GetQuestionById(1);
-    Answers[] firstAnswers = controller.GetAnswerByQuestion(1);
+    var firsQuestion = controller.GetQuestionById(id);
+    Answers[] firstAnswers = controller.GetAnswerByQuestion(id);
 }
 
-<script>
-    function getAnswers(id) {
-        $.ajax({
-            type: "POST",
-            url: "QuestionController/GetQuestionById",
-            data: { id: id },
-            success: function (response) {
-                var firsQuestion = response.firsQuestion;
-                var firstAnswers = response.firstAnswers;
+@*<script>
+    //function getAnswers(id) {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "QuestionController/GetQuestionById",
+    //        data: { id: id },
+    //        success: function (response) {
+    //            var firsQuestion = response.firsQuestion;
+    //            var firstAnswers = response.firstAnswers;
 
-                $("#button1").text(firstAnswers[0].Answer);
-                $("#button2").text(firstAnswers[1].Answer);
-                $("#button3").text(firstAnswers[2].Answer);
-            }
+    //            $("#button1").text(firstAnswers[0].Answer);
+    //            $("#button2").text(firstAnswers[1].Answer);
+    //            $("#button3").text(firstAnswers[2].Answer);
+    //            $("#button4").text(firstAnswers[3].Answer);
+    //        }
 
-        })
+    //    })
     }
-</script>
-
+</script>*@
 <div>
     <p>
         @(firsQuestion.Question)
     </p>
-    <button>@(firstAnswers[0].Answer)</button>
-    <button>@(firstAnswers[1].Answer)</button>
-    <button>@(firstAnswers[2].Answer)</button>
+    <button id="previus">Előző</button>
+    <form method="post" asp-action="ChangeVariable">
+        <button type="submit">@(firstAnswers[0].Answer)</button>
+        <button type="submit">@(firstAnswers[1].Answer)</button>
+        <button type="submit">@(firstAnswers[2].Answer)</button>
+        <button type="submit">@(firstAnswers[3].Answer)</button>
+    </form>
+    @*<form action="@Url.Action("NextId", "Question")" method="post">*@
+        <button type="submit">Következő</button>
+        <p>Current Value: @id</p>
+    @*</form>*@
 </div>
+<script>
+    //var nextButton = document.getElementById('next');
+    //var backButton = document.getElementById('previus');
+
+    //nextButton.addEventListener('click', nextID);
+
+    //function nextID() {
+    //    id++;
+    //    console.log(id);
+    //}
+    //window.addEventListener('unload', function () {
+    //    nextButton.removeEventListener('click', nextID);
+    //});
+</script>

@@ -15,7 +15,7 @@ namespace Bamm.Dnn.Dnn.Bamm.HelloWorld.Controllers
     {
         public Questions GetQuestionById(int id)
         {
-            using(var ctx = DataContext.Instance())
+            using (var ctx = DataContext.Instance())
             {
                 var q = ctx.GetRepository<Questions>();
                 return q.GetById(id);
@@ -28,6 +28,25 @@ namespace Bamm.Dnn.Dnn.Bamm.HelloWorld.Controllers
             {
                 return ctx.GetRepository<Answers>().Find("WHERE QuestionId = @0", questionId).ToArray();
             }
+        }
+
+        private int nextId = 0; // Variable declared at the controller level
+
+        public ActionResult Index()
+        {
+            // Pass the variable to the view
+            ViewBag.MyVariable = nextId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult IncrementVariable()
+        {
+            // Increment the variable
+            nextId++;
+
+            // Optionally, you can redirect to another action or return a view
+            return RedirectToAction("Index");
         }
     }
 }

@@ -12,6 +12,10 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwn
 DROP TABLE {databaseOwner}[{objectQualifier}HelloWorld_Items]
 GO
 
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}HelloWorld_Answers]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}HelloWorld_Answers]
+GO
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}HelloWorld_Questions]') AND type in (N'U'))
 DROP TABLE {databaseOwner}[{objectQualifier}HelloWorld_Questions]
 GO
@@ -78,24 +82,24 @@ GO
 INSERT INTO {databaseOwner}{objectQualifier}HelloWorld_Questions
            (Question)
      VALUES
-           ('Kérdés1', 'Kérdés2', 'Kérdés3', 'Kérdés4')
+           ('Milyen lenne az álom eljegyzési gyűrűje?'),('Milyen fajta ékszert hord jelenleg?'),('Melyik korosztályba tartozik?'),
+           ('Melyik stílus áll Önhöz legközelebb?'),('Milyen színből áll leginkább a ruhatára?'),('Mikor érzi magát a legmagabiztosabbnak?'),
+           ('Ékszerválasztás során mi mérvadó Ön számára?'),('Melyik a kedvenc évszaka?'),('Milyen színű a szeme?'),('Milyen színű a haja?');
 GO
 
 INSERT INTO {databaseOwner}{objectQualifier}HelloWorld_Answers
            (QuestionId, Answer, NextQuestionId)
      VALUES
-           (1,'A',1)
-           (1,'B',1)
-           (1,'C',1)
-           (2,'A',1)
-           (2,'B',1)
-           (2,'C',1)
-           (3,'A',1)
-           (3,'B',1)
-           (3,'C',1)
-           (4,'A',1)
-           (4,'B',1)
-           (4,'C',1)
+(1,'Egyszerű, letisztult, legfeljebb egy pici kővel a közepén.',2),(1,'Egy gyűrű hatalmas gyémánttal és sok kisebb gyémánttal kirakva.',2),(1,'Mindenképpen valami különleges, egyedi darab.',2),(1,'Mindegy milyen, az összhangra, összhatásra koncentrálok.',2),
+(2,'Arany',3),(2,'Ezüst/Fehérarany',3),(2,'Mindkettő',3),(2,'Nem hordok ékszert',3),
+(3,'18 év alatti',4),(3,'18-35 év között',4),(3,'36-55 év között',4),(3,'55 év felett',4),
+(4,'Klasszikus és elegáns',5),(4,'Modern és trendi',5),(4,'Vintage és bohém',5),(4,'Minimalista és letisztult',5),
+(5,'Fehér',6),(5,'Pasztell színek',6),(5,'Élénk színek',6),(5,'Fekete',6),
+(6,'Amikor elegánsan vagyok öltözve.',7),(6,'Amikor divatos, trendi ruhákat viselek.',7),(6,'Amikor egyedi, feltűnő kiegészítőket hordok.',7),(6,'Amikor kényelmes, funkcionális ruházatot viselhetek.',7),
+(7,'Mérvadó, hogy jól tudjam kombinálni a ruháimmal, passzoljon a stílusomhoz.',8),(7,'Számomra fontos, hogy értékes legyen az ékszer, mert inkább a minőségre, mint a mennyiségre szavazok.',8),(7,'Örülök neki, ha valamilyen alkalomra, különleges személytől kapom az ékszert, így egyedi kapcsolatom lehet vele.',8),(7,'Impulzívan választok, ami éppen megtetszik.',8),
+(8,'Tavasz',9),(8,'Nyár',9),(8,'Ősz',9),(8,'Tél',9),
+(9,'Kék',10),(9,'Barna',10),(9,'Zöld',10),(9,'Szürke',10),
+(10,'Barna',null),(10,'Fekete',null),(10,'Vörös',null),(10,'Szőke',null);
 GO
 
 

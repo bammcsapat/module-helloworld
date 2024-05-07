@@ -22,5 +22,7 @@ namespace Bamm.Dnn.Dnn.Bamm.HelloWorld.Components
         Questions GetQuestionById(int id);
 
         Answers[] GetAnswerByQuestion(int id);
+
+        Answers[] GetNextQuestionId(int questionId);
     }
 }
