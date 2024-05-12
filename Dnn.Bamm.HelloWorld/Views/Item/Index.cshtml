@@ -40,18 +40,18 @@
     }
 </script>*@
 <div>
-    <p>
+    <p id="question">
         @(firsQuestion.Question)
     </p>
     <button id="previus">Előző</button>
     <form method="post" asp-action="ChangeVariable">
-        <button type="submit">@(firstAnswers[0].Answer)</button>
-        <button type="submit">@(firstAnswers[1].Answer)</button>
-        <button type="submit">@(firstAnswers[2].Answer)</button>
-        <button type="submit">@(firstAnswers[3].Answer)</button>
+        <button id="valaszA" type="submit">@(firstAnswers[0].Answer)</button>
+        <button id="valaszB" type="submit">@(firstAnswers[1].Answer)</button>
+        <button id="valaszC" type="submit">@(firstAnswers[2].Answer)</button>
+        <button id="valaszD" type="submit">@(firstAnswers[3].Answer)</button>
     </form>
     @*<form action="@Url.Action("NextId", "Question")" method="post">*@
-        <button type="submit">Következő</button>
+        <button id="next" type="submit">Következő</button>
         <p>Current Value: @id</p>
     @*</form>*@
 </div>
